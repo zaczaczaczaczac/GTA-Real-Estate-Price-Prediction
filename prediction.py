@@ -40,12 +40,12 @@ models = {
 results = {}
 for name, model in models.items():
     if name == "SVM":
-        params = {'kernel': ['linear', 'rbf'], 'C': [1, 10, 100]}
+        params = {'kernel': ['linear', 'rbf'], 'C': [1, 10, 100], 'epsilon': [0.1, 0.2, 0.5]}
         grid = GridSearchCV(model, params, cv=5, scoring='neg_mean_squared_error')
         grid.fit(X_train, y_train)
         model = grid.best_estimator_
     else:
-        params = {'n_estimators': [100, 200], 'max_depth': [None, 10, 20]}
+        params = {'n_estimators': [100, 200], 'max_depth': [None, 10, 20], 'min_samples_split': [2, 5], 'min_samples_leaf': [1, 2]}
         grid = GridSearchCV(model, params, cv=5, scoring='neg_mean_squared_error')
         grid.fit(X_train, y_train)
         model = grid.best_estimator_
@@ -61,7 +61,7 @@ for name, metrics in results.items():
     print(f"{name}: MSE = {metrics['MSE']:.2f}, RMSE = {metrics['RMSE']:.2f}")
 
 # Visualization of the best model
-best_model = RandomForestRegressor(random_state=42)
+best_model = RandomForestRegressor(random_state=42, n_estimators=200, max_depth=None, min_samples_split=2, min_samples_leaf=1)
 best_model.fit(X_train, y_train)
 y_pred_best = best_model.predict(X_test)
 
