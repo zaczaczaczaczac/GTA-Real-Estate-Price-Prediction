@@ -8,8 +8,8 @@ from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 
 # Load dataset
-data_path = '/Users/zactseng/Documents/ECE 1513/Project/GTA-Real-Estate-Price-Prediction/clean_combined_toronto_property_data.csv'
-data = pd.read_csv(data_path)
+data_path = '/Users/zactseng/Documents/ECE 1513/Project/GTA-Real-Estate-Price-Prediction/clean_combined_toronto_property_data.xlsx'
+data = pd.read_excel(data_path)
 
 # Data preprocessing
 # Select relevant features
